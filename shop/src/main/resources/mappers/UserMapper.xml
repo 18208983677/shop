@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"      
+	"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+
+<mapper namespace="xiong.shop.mapper.UserMapper">
+
+	<!-- 插入用户数据 -->
+	<!-- Integer addnew(User user) -->
+	<insert id="addnew">
+	INSERT INTO t_user (
+	    username, password,
+	    salt, gender,
+	    phone, email,
+	    avatar, is_delete,
+	    created_user, created_time,
+	    modified_user, modified_time
+	) VALUES (
+	    #{username}, #{password},
+	    #{salt}, #{gender},
+	    #{phone}, #{email},
+	    #{avatar}, #{isDelete},
+	    #{createdUser}, #{createdTime},
+	    #{modifiedUser}, #{modifiedTime}
+	)
+	</insert>
+	<!-- 根据用户名查询用户信息 -->
+	<!-- User findByUsername(String username) -->
+	<select id="findByUsername"
+			resultType="xiong.shop.entity.User">
+			SELECT 
+				uid 
+			FROM 
+				t_user 
+			WHERE 
+				username=#{username}
+		</select>
+		<!--根据电话查找对应用户uid  -->
+		<!-- Integer findUidByPhone(String phone); -->
+	<select id="findUidByPhone" resultType="java.lang.Integer">
+		SELECT 
+			uid
+		FROM
+			t_user
+		WHERE
+			phone=#{phone}
+	</select>
+</mapper>
